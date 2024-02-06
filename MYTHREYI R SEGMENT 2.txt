@@ -1,0 +1,11 @@
+MYTHREYI R SEGMENT 2
+1) c. 1024x10
+2) a. 4
+3) d. Weights for the feature “Temperature”
+4) b. decrease
+5) b. 2w
+6) a.1
+7) b. 1025 x 103
+8) c. 3 
+9) c. It is applied to both weights and biases
+10) a. 64

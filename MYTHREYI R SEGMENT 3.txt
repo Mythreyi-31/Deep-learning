@@ -1,0 +1,11 @@
+MYTHREYI R SEGMENT 3
+1) c. It is node-wise connected to the dense layer before
+2) c. ReLU
+3) c. ReLU
+4) b. tanh
+5) d. [0,0,0,1,0]
+6) c. -log(0.15)
+7) d. 10 x 11
+8) a. 6 x10
+9) c. 5x10
+10) a.  Weights
