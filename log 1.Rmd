@@ -1,0 +1,76 @@
+---
+title: "log"
+author: "r"
+date: "2024-02-26"
+output: html_document
+---
+```{r}
+library(pROC)
+library(ggplot2)
+
+```
+
+```{r}
+diabetes_data <- read.csv("D:/2nd sem/Applied-Advanced-Probability-and-Statistics/Codes/Data/diabetes.csv")
+```
+
+
+```{r}
+X <- diabetes_data[, -9] # Predictors
+Y <- diabetes_data[, 9]  # Outcome
+```
+
+```{r}
+log_model <- glm(Outcome ~ ., data = diabetes_data, family = binomial)
+
+```
+
+```{r}
+summary(log_model)
+```
+
+
+
+```{r}
+predicted_probabilities <- predict(log_model, type = "response")
+
+```
+
+```{r}
+roc_curve <- roc(Y, predicted_probabilities)
+ggroc(roc_curve)
+
+```
+```{r}
+library(pracma)
+
+```
+
+
+```{r}
+# Assuming 'predicted_probabilities' and 'Y' are already defined as predicted probabilities and actual outcomes
+
+# Function to calculate precision and recall
+calculate_precision_recall <- function(threshold) {
+  predicted_class <- ifelse(predicted_probabilities >= threshold, 1, 0)
+  true_positives <- sum(predicted_class == 1 & Y == 1)
+  false_positives <- sum(predicted_class == 1 & Y == 0)
+  false_negatives <- sum(predicted_class == 0 & Y == 1)
+  precision <- true_positives / (true_positives + false_positives)
+  recall <- true_positives / (true_positives + false_negatives)
+  return(c(precision = precision, recall = recall))
+}
+
+# Create a sequence of thresholds
+thresholds <- seq(0, 1, by = 0.01)
+
+# Calculate precision and recall for each threshold
+precision_recall_values <- sapply(thresholds, calculate_precision_recall)
+
+# Plot precision-recall curve
+plot(precision_recall_values["recall", ], precision_recall_values["precision", ],
+     type = "l", xlab = "Recall", ylab = "Precision", 
+     main = "Precision-Recall Curve")
+
+```
+
